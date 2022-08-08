@@ -4,7 +4,7 @@
     // https://stackoverflow.com/questions/61161286/how-to-randomly-select-a-card-from-a-deck-of-cards-and-not-select-it-again
 
     var drawnCardsDisplay = document.getElementById('drawnCards');
-    var cards = [
+    const selectableCards = [
       'ace_of_clubs',
       '2_of_clubs',
       '3_of_clubs',
@@ -59,56 +59,21 @@
       'king_of_spades'
   ];
     
-    var currentCards = [];
+
+const currentCard = {}
+const cardsAlreadySelected = []
+const kingsCup = 0
+
+const drawCard = () => {
+  const randomNumber = Math.floor(Math.random() * (selectableCards.length))
+  const currentCard = selectableCards.splice(randomNumber, 1)
+  showDrawnCards(currentCard)
+}
     
-    function drawCard() {
-        // ue cards here instead of currentCards
-        var randomNumber = Math.floor(Math.random() * (cards.length - 1));
-        
-        currentCards.push(
-          // Run an immediately self executing function expression
-          (function(){
-            // store the elected card temorarily
-            var tempSelectedCard = cards[randomNumber];
-            // Remove that card from the main cards
-            cards = getUnDrawnCards(randomNumber);
-            // return the selected card and store it inside the currentCards array
-            return tempSelectedCard;
-          })()
-        );
-        // After Drawing the card, display it.
-        showDrawnCards(currentCards);
-    }
-    
-    function getUnDrawnCards(cardPositionToBeRemoved) // returns card[]
+function showDrawnCards(drawnCardsArray)
+{
+  if(drawnCardsArray.length > 0 && drawnCardsArray.length < 53)
     {
-      if(cardPositionToBeRemoved)
-      {
-        // create a temporary array storage
-        var tempNewCards = [];
-        
-        // Loop through the cards
-        cards.forEach(function(card, index)
-        {
-          // if the card to be removed does matches the current card position
-          if(index !== cardPositionToBeRemoved)
-          {
-            // Add it to the tempArrayList
-            tempNewCards.push(cards[index]);
-          }
-          // At tis poist the matched index will not be part of the cards anymore
-        });
-        
-        // Return tempNewCards
-        return tempNewCards;
-      }
-      return [];
-    }
-    
-    function showDrawnCards(drawnCardsArray)
-    {
-      if(drawnCardsArray.length > 0 && drawnCardsArray.length < 53)
-      {
         drawnCardsDisplay.innerHTML = '';
         drawnCardsArray.map(function(card)
         {
