@@ -3,7 +3,8 @@
 // draw cards functionality adapted from code initially found at 
     // https://stackoverflow.com/questions/61161286/how-to-randomly-select-a-card-from-a-deck-of-cards-and-not-select-it-again
 
-const selectableCards= [
+  var drawnCardsDisplay = document.getElementById('drawnCards');
+  var cards = [
     'ace_of_clubs',
     '2_of_clubs',
     '3_of_clubs',
@@ -58,22 +59,62 @@ const selectableCards= [
     'king_of_spades'
 ];
 
-const currentCard = {}
-const cardsAlreadySelected = []
-const kingsCup = 0
+var currentCards = [];
 
-const drawCard = () => {
-  const randomNumber = Math.floor(Math.random() * (selectableCards.length))
-  const currentCard = selectableCards.splice(randomNumber, 1)
-  //console.log(currentCard.length)
-  //document.getElementById("cards").src = `assets/js/games/cards/${currentCard}.png`
-  //testing image display code from https://stackoverflow.com/questions/17634019/javascript-load-an-image-from-url-and-display
-  document.getElementById('draw card').onclick - function() {
-    var val = document.getElementById('currentCard').value,
-    src = 'https://github.com/cbeckler/kings-cup-web-game/blob/main/resources/' + val + '.png',
-    img = document.createElement('img');
+function drawCard() {
+    // ue cards here instead of currentCards
+    var randomNumber = Math.floor(Math.random() * (cards.length - 1));
 
-    img.src = src;
-    document.body.appendChild(img);
+    currentCards.push(
+      // Run an immediately self executing function expression
+      (function(){
+        // store the elected card temorarily
+        var tempSelectedCard = cards[randomNumber];
+        // Remove that card from the main cards
+        cards = getUnDrawnCards(randomNumber);
+        // return the selected card and store it inside the currentCards array
+        return tempSelectedCard;
+      })()
+    );
+    // After Drawing the card, display it.
+    showDrawnCards(currentCards);
+}
+
+function getUnDrawnCards(cardPositionToBeRemoved) // returns card[]
+{
+  if(cardPositionToBeRemoved)
+  {
+    // create a temporary array storage
+    var tempNewCards = [];
+
+    // Loop through the cards
+    cards.forEach(function(card, index)
+    {
+      // if the card to be removed does matches the current card position
+      if(index !== cardPositionToBeRemoved)
+      {
+        // Add it to the tempArrayList
+        tempNewCards.push(cards[index]);
+      }
+      // At tis poist the matched index will not be part of the cards anymore
+    });
+
+    // Return tempNewCards
+    return tempNewCards;
   }
-};
+  return [];
+}
+
+function showDrawnCards(drawnCardsArray)
+{
+  if(drawnCardsArray.length > 0)
+  {
+    drawnCardsDisplay.innerHTML = '';
+    drawnCardsArray.map(function(card)
+    {
+      var drawn_card = document.createElement('span');
+      drawn_card.innerHTML = card;
+      drawnCardsDisplay.appendChild(drawn_card);
+    });
+  }
+} 
