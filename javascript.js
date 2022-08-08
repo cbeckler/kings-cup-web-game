@@ -66,5 +66,5 @@ const drawCard = () => {
   const randomNumber = Math.floor(Math.random() * (selectableCards.length))
   const currentCard = selectableCards.splice(randomNumber, 1)
   console.log(currentCard.length)
-  document.getElementById("cards").src = `https://github.com/cbeckler/kings-cup-web-game/blob/main/resources/${drawn_card}.png`
+  document.getElementById("cards").src = `https://github.com/cbeckler/kings-cup-web-game/blob/main/resources/${currentCard}.png`
 };
