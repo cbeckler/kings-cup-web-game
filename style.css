@@ -1,0 +1,11 @@
+span{
+    display: inline-block;
+    width: 120px;
+    line-height: 40px;
+    text-align: center;
+    border: thin solid #dbdbdb;
+    margin: 5px;
+  }
+  button{
+  margin-top: 15px;
+  }
