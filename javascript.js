@@ -65,6 +65,15 @@ const kingsCup = 0
 const drawCard = () => {
   const randomNumber = Math.floor(Math.random() * (selectableCards.length))
   const currentCard = selectableCards.splice(randomNumber, 1)
-  console.log(currentCard.length)
-  document.getElementById("cards").src = `../resources/${currentCard}.png`
+  //console.log(currentCard.length)
+  //document.getElementById("cards").src = `assets/js/games/cards/${currentCard}.png`
+  //testing image display code from https://stackoverflow.com/questions/17634019/javascript-load-an-image-from-url-and-display
+  document.getElementById('draw card').onclick - function() {
+    var val = document.getElementById('currentCard').value,
+    src = 'https://github.com/cbeckler/kings-cup-web-game/blob/main/resources/' + val + '.png',
+    img = document.createElement('img');
+
+    img.src = src;
+    document.body.appendChild(img);
+  }
 };
