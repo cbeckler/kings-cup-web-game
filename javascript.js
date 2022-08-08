@@ -109,13 +109,6 @@ function showDrawnCards(drawnCardsArray)
 {
   if(drawnCardsArray.length > 0)
   {
-    drawnCardsDisplay.innerHTML = '';
-    drawnCardsArray.map(function(card)
-    {
-      var drawn_card = document.createElement('span');
-      drawn_card.innerHTML = card;
-      //drawnCardsDisplay.appendChild(drawn_card);
       document.getElementById("cards").src = `https://github.com/cbeckler/kings-cup-web-game/blob/main/resources/${drawn_card}.png`
-    });
+    };
   }
-}
