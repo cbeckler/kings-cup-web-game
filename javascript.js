@@ -107,7 +107,7 @@
     
     function showDrawnCards(drawnCardsArray)
     {
-      if(drawnCardsArray.length > 0)
+      if(drawnCardsArray.length > 0 && drawnCardsArray.length < 53)
       {
         drawnCardsDisplay.innerHTML = '';
         drawnCardsArray.map(function(card)
