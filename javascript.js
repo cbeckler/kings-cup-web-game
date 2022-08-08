@@ -67,19 +67,9 @@ const kingsCup = 0
 const drawCard = () => {
   const randomNumber = Math.floor(Math.random() * (selectableCards.length))
   const currentCard = selectableCards.splice(randomNumber, 1)
-  showDrawnCards(currentCard)
+  console.log(currentCard.length)
+  var img = new Image();
+  img.src = 'https://github.com/cbeckler/kings-cup-web-game/blob/main/resources/' + currentCard + '.png'
+  img_home.appendChild(img)
 }
     
-function showDrawnCards(drawnCardsArray)
-{
-  if(drawnCardsArray.length > 0 && drawnCardsArray.length < 53)
-    {
-        drawnCardsDisplay.innerHTML = '';
-        drawnCardsArray.map(function(card)
-        {
-          var drawn_card = document.createElement('span');
-          drawn_card.innerHTML = card;
-          drawnCardsDisplay.appendChild(drawn_card);
-        });
-      }
-    }
